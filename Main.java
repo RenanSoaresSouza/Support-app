@@ -17,15 +17,6 @@ public class Main {
            
            
         }
-        try{
-            conex.delete(2);
-        } catch (ConectException e){
-
-        } catch (DataException x){
-            System.out.println(x);
-        } catch (Exception y){
-
-        }
         
     }
     
