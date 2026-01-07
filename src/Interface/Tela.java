@@ -46,7 +46,7 @@ public class Tela extends JFrame {
         JTextField campoDescricao = new JTextField();
         panel.add(campoDescricao);
 
-        panel.add(new JLabel("warn"));
+        panel.add(new JLabel("prioridade"));
         JTextField campoWarn = new JTextField();
         panel.add(campoWarn);
 
