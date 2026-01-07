@@ -14,7 +14,7 @@ public class Main {
            
         }
         try {
-           
+           conex.delete(1);
         } catch (Exception e){
             System.out.println(e);
         } finally {
