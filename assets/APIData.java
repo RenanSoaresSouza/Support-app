@@ -13,7 +13,9 @@ import java.net.http.HttpRequest.BodyPublishers;
 
 public class APIData {
     public JSONObject resp;
+    //especifica
     private String acesshash="$2a$10$8C8qaqNhJ9HV6cS42hCV9ewD0IjIdtf6oj9Mp1AWcqQhQbbDuhT7G$2a$10$Py6MKyabZP/OjYFTB1FT0uyFDgOCYPNSJCJdn7zz6cny./tZnwwUa";
+    //obrigatorio
     private String masterhash="$2a$10$negQhtyqGktYvUMnzrxYLu4NrAYs9BbBDJbrO.TJu/.j9YNL0uCg2";    
     static final String apiUrl = "https://api.jsonbin.io/v3/b/695e5420d0ea881f405aac00";
     private JSONObject data;
