@@ -17,11 +17,11 @@ public class API {
     private String masterhash="$2a$10$negQhtyqGktYvUMnzrxYLu4NrAYs9BbBDJbrO.TJu/.j9YNL0uCg2";    
     static final String apiUrl = "https://api.jsonbin.io/v3/b/695d9895d0ea881f40594031";
     HttpClient client = HttpClient.newHttpClient();
-        public int get () throws Exception {
+        public int get () throws Exception { //VAI COLETAR OS DADOS DA API
                 HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(apiUrl))
                 .GET() 
-                .header("Accept", "application/json") // Variavel de requisição
+                .header("Accept", "application/json")
                 .header("X-Master-Key",masterhash)
                 .header("X-Access-Key",acesshash)
                 .build();
