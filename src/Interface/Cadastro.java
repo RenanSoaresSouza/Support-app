@@ -2,6 +2,9 @@ package Interface;
 
 import javax.swing.*;
 import javax.swing.text.MaskFormatter;
+
+import assets.APICad;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,6 +17,7 @@ public class Cadastro extends Template{
     private JTextField campoTelefone;
     private JTextField campoEmail;
     private JLabel Error;
+    private APICad api = new APICad();
 
     public Cadastro(){
         super();
@@ -126,15 +130,20 @@ public class Cadastro extends Template{
             return;
         }
         if(telefone.isEmpty()){
-            telefone = "";
+            telefone = "Vazio";
         }
         if(email.isEmpty()){
-            email = "";
+            email = "Vazio";
         }
 
         Error.setVisible(false);
 
         limparDados();
+        try {
+            api.Cadastro(nome, senha, confirmacao,"U", email, telefone);;
+        } catch (Exception e){
+            System.out.println(e);
+        }
     }
 
     public void limparDados(){

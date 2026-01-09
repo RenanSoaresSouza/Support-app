@@ -7,7 +7,6 @@ import javax.swing.*;
 public class Main {
     public static void main(String[] argv){
 
-
         SwingUtilities.invokeLater(() -> {
             EscolhaLogin tela = new EscolhaLogin();
             tela.setVisible(true);

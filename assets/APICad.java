@@ -17,16 +17,23 @@ public class APICad {
     static final String apiUrl = "https://api.jsonbin.io/v3/b/695ec72443b1c97be9204449";
     private String user;
     private String password;
+    private String telefone;
+    private String email;
+    private String Type;
     JSONObject resp;
+    public String data;
 
     HttpClient client = HttpClient.newHttpClient();
-    public void CadApi()throws Exception{
+    private void CadApi()throws Exception{
             JSONObject data = new JSONObject(this.resp.toString()); 
             data = data.getJSONObject("record");
             
             JSONObject cad = new JSONObject();
             cad.put("user", this.user);
             cad.put("password", this.password);
+            cad.put("type",this.Type);
+            cad.put("Telefone",this.telefone);
+            cad.put("Email",this.email);
             
             data.getJSONArray("data").put(cad);
 
@@ -45,7 +52,7 @@ public class APICad {
                 throw new ConectException("erro ao Cadastrar os dados");
             }
     }
-    public void Cadastro(String u,String p,String rp) throws Exception{
+    public void Cadastro(String u,String p,String rp,String T,String em, String tel) throws Exception{
         if (p.equals(rp) && !(u.isBlank()||p.isBlank())){
             boolean finded = false;
             HttpRequest request = HttpRequest.newBuilder()
@@ -71,6 +78,9 @@ public class APICad {
                 if (finded == false){
                     this.user = u;
                     this.password = p;
+                    this.Type = T;
+                    this.email = em;
+                    this.telefone = tel;
                     CadApi();
                 }
 
@@ -81,8 +91,7 @@ public class APICad {
             throw new LoginException("as senhas não são iguais");
         }
     }
-    public void Login(String u,String p) throws Exception{
-            if (u.isBlank() || p.isBlank()){
+    public void Login(String u,String p,String T) throws Exception{ if (u.isBlank() || p.isBlank()){
                 throw new LoginException("Senha e/ou Usuários não podem ficar brancos");
             } else {
                 boolean finded = false;
@@ -101,9 +110,10 @@ public class APICad {
                 JSONArray loginarr = new JSONArray(resp.getJSONObject("record").getJSONArray("data"));
                 for (int x=0;x<loginarr.length();x++){
                     JSONObject loginobj = new JSONObject(loginarr.get(x).toString());
-                    if (loginobj.getString("password").equals(p) && loginobj.getString("user").equals(u)){
+                    if (loginobj.getString("password").equals(p) && loginobj.getString("user").equals(u) && loginobj.getString("type").equals(T)){
                         finded = true;
                         System.out.println("Login Efetuado com Sucesso");
+                        this.data = loginarr.get(x).toString();
                     }
                 }
                 if (finded == false){
