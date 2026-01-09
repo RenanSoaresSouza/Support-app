@@ -22,17 +22,19 @@ class Template extends JFrame {
 }
 
 public class Login extends Template {
-    private JTextField campoLogin;
-    private JPasswordField campoSenha;
-    private JLabel Error;
+    protected JTextField campoLogin;
+    protected JPasswordField campoSenha;
+    protected JLabel Error;
+    protected String tipo;
 
-    public Login() {
+    public Login(String tipo) {
         super();
         setTitle("Login");
-        paineldeLogin();
+        this.tipo = tipo;
+        paineldeLogin(this.tipo);
     }
 
-    private void paineldeLogin() {
+    protected void paineldeLogin(String tipo) {
         JPanel painelLogin = new JPanel();
         painelLogin.setBounds(170, 100, 260, 180);
         painelLogin.setBackground(new Color(170, 170, 170));
@@ -43,7 +45,7 @@ public class Login extends Template {
         login.setFont(new Font("Arial", Font.PLAIN, 12));
         painelLogin.add(login);
 
-        JLabel usuario = new JLabel("usuário");
+        JLabel usuario = new JLabel(tipo);
         usuario.setBounds(105, 45, 60, 20);
         usuario.setFont(new Font("Arial", Font.PLAIN, 11));
         painelLogin.add(usuario);
@@ -62,6 +64,26 @@ public class Login extends Template {
         campoSenha.setBounds(60, 130, 140, 25);
         campoSenha.setFont(new Font("Arial", Font.PLAIN, 12));
         painelLogin.add(campoSenha);
+
+        JButton ncadastro = new JButton("clique aqui para criar uma conta!");
+        ncadastro.setBackground(new Color(170,170,170));
+        ncadastro.setForeground(Color.BLACK);
+        ncadastro.setBounds(60,160,140,10);
+        ncadastro.setFont(new Font("Arial",Font.PLAIN,6));
+        ncadastro.setFocusPainted(false);
+        ncadastro.setBorderPainted(false);
+        ncadastro.setVisible(false);
+
+        if(tipo.equals("Usuario")){
+            ncadastro.setVisible(true);
+            ncadastro.addActionListener(e -> {
+                Cadastro novoCadastro = new Cadastro();
+                novoCadastro.setVisible(true);
+                disable();
+            });
+        }
+
+        painelLogin.add(ncadastro);
 
         Error = new JLabel("Erro ao fazer login");
         Error.setBounds(65, 160, 200, 20);
@@ -85,8 +107,9 @@ public class Login extends Template {
             Error.setVisible(true);
         } else{
             Error.setVisible(false);
-            JOptionPane.showMessageDialog(this,"Aguardando validacao...","Aguarde",JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this,"Iniciando validacao...","Aguarde",JOptionPane.INFORMATION_MESSAGE);
         }
 
     }
 }
+
