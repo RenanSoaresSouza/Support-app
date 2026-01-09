@@ -1,6 +1,9 @@
 package Interface;
 
 import javax.swing.*;
+
+import assets.APICad;
+
 import java.awt.*;
 
 class Template extends JFrame {
@@ -22,6 +25,7 @@ class Template extends JFrame {
 }
 
 public class Login extends Template {
+    private APICad api = new APICad();
     protected JTextField campoLogin;
     protected JPasswordField campoSenha;
     protected JLabel Error;
@@ -108,6 +112,19 @@ public class Login extends Template {
         } else{
             Error.setVisible(false);
             JOptionPane.showMessageDialog(this,"Iniciando validacao...","Aguarde",JOptionPane.INFORMATION_MESSAGE);
+            if (tipo == "Usuario"){
+                try {
+                    api.Login(usuario,senha,"U");
+                } catch (Exception e){
+                    System.out.println(e);
+                }
+            } else {
+                try {
+                    api.Login(usuario,senha,"F");
+                } catch (Exception e){
+                    System.out.println(e);
+                }
+            }
         }
 
     }
