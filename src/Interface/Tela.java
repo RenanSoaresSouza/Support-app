@@ -5,34 +5,28 @@ import javax.swing.text.MaskFormatter;
 import java.awt.*;
 import java.text.ParseException;
 
-public class Tela extends JFrame {
+public class Tela extends Template {
     public Tela() {
-        setTitle("Area de Pedidos");
-        setSize(400, 300);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
+       super();
 
-        JPanel panel = new JPanel();
+       panel.setLayout(new GridLayout(7,2,10,10));
 
-        panel.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
-        panel.setLayout(new GridLayout(7,2,10,10));
+       panel.add(new JLabel("Nome"));
+       JTextField campoNome = new JTextField();
+       panel.add(campoNome);
 
-        panel.add(new JLabel("Nome"));
-        JTextField campoNome = new JTextField();
-        panel.add(campoNome);
+       panel.add(new JLabel("Idade"));
+       JTextField campoIdade = new JTextField();
+       panel.add(campoIdade);
 
-        panel.add(new JLabel("Idade"));
-        JTextField campoIdade = new JTextField();
-        panel.add(campoIdade);
-
-        panel.add(new JLabel("CPF"));
-        MaskFormatter mascaraCpf = null;
-        try {
-            mascaraCpf = new MaskFormatter("###.###.###-##");
-            mascaraCpf.setPlaceholderCharacter('_');
+       panel.add(new JLabel("CPF"));
+       MaskFormatter mascaraCpf = null;
+       try {
+           mascaraCpf = new MaskFormatter("###.###.###-##");
+           mascaraCpf.setPlaceholderCharacter('_');
         } catch (ParseException e) {
-            System.err.println("Erro na formatacao: "+e.getMessage());
-            System.exit(-1);
+           System.err.println("Erro na formatacao: "+e.getMessage());
+           System.exit(-1);
         }
         JFormattedTextField campoCpf = new JFormattedTextField(mascaraCpf);
         campoCpf.setHorizontalAlignment(JTextField.CENTER);

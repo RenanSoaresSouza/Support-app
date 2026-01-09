@@ -9,7 +9,7 @@ public class Main {
 
 
         SwingUtilities.invokeLater(() -> {
-            Tela tela = new Tela();
+            EscolhaLogin tela = new EscolhaLogin();
             tela.setVisible(true);
         });
     }
