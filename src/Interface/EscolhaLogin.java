@@ -13,16 +13,31 @@ public class EscolhaLogin extends Template{
     }
 
     public void paineldeEscolha(){
-        JPanel telaEscolha = new JPanel();
+
+        PainelArredondado telaEscolha = new PainelArredondado();
         telaEscolha.setBounds(170, 100, 260, 180);
-        telaEscolha.setBackground(new Color(170,170,170));
+        telaEscolha.setBackground(new Color(255, 230, 255));
+        telaEscolha.setDesenharFundo(false);
         telaEscolha.setLayout(null);
 
-        JButton btCliente = new JButton("Cliente");
-        btCliente.setBounds(60,25,140,50);
-        btCliente.setFont(new Font("Arial",Font.PLAIN,11));
+        BotaoArredondado btCliente = new BotaoArredondado("Cliente");
+        btCliente.setBounds(40,5,180,65);
+        btCliente.setFont(new Font("Arial",Font.PLAIN,14));
+        btCliente.setForeground(Color.WHITE);
+        btCliente.setBackground(new Color(130, 80, 220));
         btCliente.setFocusPainted(false);
         btCliente.setBorderPainted(false);
+        btCliente.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                btCliente.setBackground(new Color(93, 23, 139)); // Cor quando o mouse entra
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+                btCliente.setBackground(new Color(130, 80, 220)); // Cor original quando o mouse sai
+            }
+        });
+
 
         btCliente.addActionListener(e ->{
             Login loginUsuario = new Login("Usuario");
@@ -31,11 +46,24 @@ public class EscolhaLogin extends Template{
         });
         telaEscolha.add(btCliente);
 
-        JButton btFuncionario = new JButton("Funcionario");
-        btFuncionario.setBounds(60,115,140,50);
-        btFuncionario.setFont(new Font("Arial",Font.PLAIN,11));
+        BotaoArredondado btFuncionario = new BotaoArredondado("Funcionario");
+        btFuncionario.setBounds(40, 105, 180, 65);
+        btFuncionario.setFont(new Font("Arial",Font.PLAIN,14));
+        btFuncionario.setForeground(Color.WHITE);
+        btFuncionario.setBackground(new Color(80, 150, 250));
         btFuncionario.setFocusPainted(false);
         btFuncionario.setBorderPainted(false);
+        btFuncionario.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                btFuncionario.setBackground(new Color(65, 105, 225)); // Cor quando o mouse entra
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+                btFuncionario.setBackground(new Color(80, 150, 250)); // Cor original quando o mouse sai
+            }
+        });
+
 
         btFuncionario.addActionListener(e ->{
             Login loginUsuario = new Login("Funcionario");
@@ -44,6 +72,7 @@ public class EscolhaLogin extends Template{
         });
 
         telaEscolha.add(btFuncionario);
+
 
         panel.add(telaEscolha);
     }
