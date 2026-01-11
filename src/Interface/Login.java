@@ -17,7 +17,7 @@ class Template extends JFrame {
         setResizable(false);
 
         panel = new JPanel();
-        panel.setBackground(new Color(70, 70, 70));
+        panel.setBackground(new Color(255, 230, 255));
         panel.setLayout(null);
 
         setContentPane(panel);
@@ -39,41 +39,49 @@ public class Login extends Template {
     }
 
     protected void paineldeLogin(String tipo) {
-        JPanel painelLogin = new JPanel();
-        painelLogin.setBounds(170, 100, 260, 180);
-        painelLogin.setBackground(new Color(170, 170, 170));
+        PainelArredondado painelLogin = new PainelArredondado();
+        painelLogin.setBounds(170, 60, 260, 220);
+        painelLogin.setBackground(new Color(240, 240, 240));
         painelLogin.setLayout(null);
 
-        JLabel login = new JLabel("login");
+        JLabel login = new JLabel("Login");
         login.setBounds(110, 10, 50, 20);
-        login.setFont(new Font("Arial", Font.PLAIN, 12));
+        login.setFont(new Font("Arial", Font.PLAIN, 19));
+        login.setForeground(Color.WHITE);
         painelLogin.add(login);
 
         JLabel usuario = new JLabel(tipo);
-        usuario.setBounds(105, 45, 60, 20);
+        usuario.setBounds(60, 40, 140, 20);
         usuario.setFont(new Font("Arial", Font.PLAIN, 11));
+        usuario.setForeground(Color.WHITE);
         painelLogin.add(usuario);
 
-        campoLogin = new JTextField();
-        campoLogin.setBounds(60, 70, 140, 25);
-        campoLogin.setFont(new Font("Arial", Font.PLAIN, 12));
+        campoLogin = new CampoArredondado();
+        campoLogin.setBounds(60, 70, 140, 30);
+        campoLogin.setFont(new Font("Arial", Font.PLAIN, 10));
+
         painelLogin.add(campoLogin);
 
-        JLabel labelSenha = new JLabel("senha");
-        labelSenha.setBounds(110, 105, 50, 20);
+        JLabel labelSenha = new JLabel("Senha");
+        labelSenha.setBounds(60, 105, 140, 20);
         labelSenha.setFont(new Font("Arial", Font.PLAIN, 11));
+        labelSenha.setForeground(Color.WHITE);
         painelLogin.add(labelSenha);
 
-        campoSenha = new JPasswordField();
-        campoSenha.setBounds(60, 130, 140, 25);
+        campoSenha = new SenhaArredondada();
+        campoSenha.setBounds(60, 130, 140, 30);
         campoSenha.setFont(new Font("Arial", Font.PLAIN, 12));
+
         painelLogin.add(campoSenha);
 
-        JButton ncadastro = new JButton("clique aqui para criar uma conta!");
+        JButton ncadastro = new JButton("Clique aqui para criar uma conta");
         ncadastro.setBackground(new Color(170,170,170));
         ncadastro.setForeground(Color.BLACK);
-        ncadastro.setBounds(60,160,140,10);
-        ncadastro.setFont(new Font("Arial",Font.PLAIN,6));
+        ncadastro.setBounds(40,180,180,20);
+        ncadastro.setFont(new Font("Arial",Font.BOLD,8));
+        ncadastro.setForeground(new Color(240, 240, 240));     // Cor azul de link
+        ncadastro.setCursor(new Cursor(Cursor.HAND_CURSOR)); // Faz aparecer a "mãozinha" do mouse
+        ncadastro.setContentAreaFilled(false);               // Remove o fundo cinza de botão
         ncadastro.setFocusPainted(false);
         ncadastro.setBorderPainted(false);
         ncadastro.setVisible(false);

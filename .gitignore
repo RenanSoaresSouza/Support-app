@@ -9,3 +9,4 @@ gen/
 
 # Outros arquivos temporários
 json/
+/bin/

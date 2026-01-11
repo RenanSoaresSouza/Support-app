@@ -1,7 +1,6 @@
 package Interface;
 
 import javax.swing.*;
-import javax.swing.text.MaskFormatter;
 
 import assets.APICad;
 
@@ -21,67 +20,74 @@ public class Cadastro extends Template{
 
     public Cadastro(){
         super();
-        panel.setBackground(Color.white);
+        setTitle("Cadastro");
+        panel.setBackground(new Color(255, 230, 255));
         paineldeCadastro();
     }
 
     private void paineldeCadastro(){
-        JPanel telaCadastro = new JPanel();
-        telaCadastro.setBounds(100,0,400,400);
+        PainelArredondado telaCadastro = new PainelArredondado();
+        telaCadastro.setBounds(50, 10, 500, 350); // Ajustei o tamanho para caber tudo melhor
         telaCadastro.setLayout(null);
 
         JLabel Cadastre_se = new JLabel("Cadastre-se!");
-        Cadastre_se.setBounds(150,5,200,100);
+        Cadastre_se.setBounds(210,5,200,100);
         Cadastre_se.setFont(new Font("Arial", Font.PLAIN,20));
+        Cadastre_se.setForeground(Color.WHITE);
         telaCadastro.add(Cadastre_se);
 
         JLabel nome = new JLabel("Nome : ");
         nome.setBounds(100,80,60,20);
-        nome.setFont(new Font("Arial", Font.PLAIN, 11));
+        nome.setFont(new Font("Arial", Font.PLAIN, 12));
+        nome.setForeground(Color.WHITE);
         telaCadastro.add(nome);
 
-        campoNome = new JTextField();
-        campoNome.setBounds(160,80,140,25);
+        campoNome = new CampoArredondado();
+        campoNome.setBounds(160,80,220,25);
         campoNome.setFont(new Font("Arial", Font.PLAIN, 11));
         telaCadastro.add(campoNome);
 
         JLabel senha = new JLabel("Senha :");
         senha.setBounds(100,120,60,20);
-        senha.setFont(new Font("Arial", Font.PLAIN, 11));
+        senha.setFont(new Font("Arial", Font.PLAIN, 12));
+        senha.setForeground(Color.WHITE);
         telaCadastro.add(senha);
 
-        campoSenha = new JPasswordField();
-        campoSenha.setBounds(160,120,140,25);
+        campoSenha = new SenhaArredondada();
+        campoSenha.setBounds(160,120,220,25);
         campoSenha.setFont(new Font("Arial", Font.PLAIN, 11));
         telaCadastro.add(campoSenha);
 
         JLabel confirmacao = new JLabel("Confirme sua senha :");
         confirmacao.setBounds(35,160,120,20);
-        confirmacao.setFont(new Font("Arial", Font.PLAIN, 11));
+        confirmacao.setFont(new Font("Arial", Font.PLAIN, 12));
+        confirmacao.setForeground(Color.WHITE);
         telaCadastro.add(confirmacao);
 
-        campoConfirmacao = new JPasswordField();
-        campoConfirmacao.setBounds(160,160,140,25);
+        campoConfirmacao = new SenhaArredondada();
+        campoConfirmacao.setBounds(160,160,220,25);
         campoConfirmacao.setFont(new Font("Arial", Font.PLAIN, 11));
         telaCadastro.add(campoConfirmacao);
 
         JLabel telefone = new JLabel("Telefone(opcional) :");
         telefone.setBounds(40,200,120,20);
-        telefone.setFont(new Font("Arial", Font.PLAIN, 11));
+        telefone.setFont(new Font("Arial", Font.PLAIN, 12));
+        telefone.setForeground(Color.WHITE);
         telaCadastro.add(telefone);
 
-        campoTelefone = new JTextField();
-        campoTelefone.setBounds(160,200,140,25);
+        campoTelefone = new CampoArredondado();
+        campoTelefone.setBounds(160,200,220,25);
         campoTelefone.setFont(new Font("Arial", Font.PLAIN, 11));
         telaCadastro.add(campoTelefone);
 
         JLabel email = new JLabel("Email(opcional) :");
         email.setBounds(55,240,120,20);
-        email.setFont(new Font("Arial", Font.PLAIN, 11));
+        email.setFont(new Font("Arial", Font.PLAIN, 12));
+        email.setForeground(Color.WHITE);
         telaCadastro.add(email);
 
-        campoEmail = new JTextField();
-        campoEmail.setBounds(160,240,140,25);
+        campoEmail = new CampoArredondado();
+        campoEmail.setBounds(160,240,220,25);
         campoEmail.setFont(new Font("Arial", Font.PLAIN, 11));
         telaCadastro.add(campoEmail);
 
@@ -92,14 +98,15 @@ public class Cadastro extends Template{
         Error.setVisible(false);
         telaCadastro.add(Error);
 
-        JButton enviar = new JButton("Cadastrar dados");
-        enviar.setBounds(210,340,120,40);
+        BotaoArredondado enviar = new BotaoArredondado("CADASTRAR");
+        enviar.setBounds(210,280,120,40);
         enviar.setFont(new Font("Arial",Font.PLAIN,11));
-
+        enviar.setBackground(Color.WHITE);
+        enviar.setForeground(new Color(65, 105, 225));
 
         enviar.addActionListener(e -> {
-            realizarCadastro();
-            }
+                    realizarCadastro();
+                }
         );
 
         telaCadastro.add(enviar);
