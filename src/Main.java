@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] argv){
 
         SwingUtilities.invokeLater(() -> {
-            Tela_Cliente tela = new Tela_Cliente();
+            Tela_Funcionarios tela = new Tela_Funcionarios();
             tela.setVisible(true);
         });
     }

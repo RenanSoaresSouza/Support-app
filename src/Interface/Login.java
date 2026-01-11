@@ -3,6 +3,8 @@ package Interface;
 import javax.swing.*;
 
 import assets.APICad;
+import assets.Exceptions.ConectException;
+import assets.Exceptions.LoginException;
 
 import java.awt.*;
 
@@ -123,15 +125,23 @@ public class Login extends Template {
             if (tipo == "Usuario"){
                 try {
                     api.Login(usuario,senha,"U");
-                } catch (Exception e){
-                    System.out.println(e);
+                }catch (ConectException e){
+                	ExibirErros.exibir("Erro de Conexao");
+                }catch(LoginException e) {
+                	ExibirErros.exibir("Senha na1o Coincide");
+                }catch(Exception e) {
+                	ExibirErros.exibir("Erro desconhecido");
                 }
             } else {
                 try {
                     api.Login(usuario,senha,"F");
-                } catch (Exception e){
-                    System.out.println(e);
-                }
+                }catch (ConectException e){
+                	ExibirErros.exibir("Erro de Conexao");
+                }catch(LoginException e) {
+                	ExibirErros.exibir("Senha na1o Coincide");
+                }catch(Exception e) {
+                	ExibirErros.exibir("Erro desconhecido");
+                } 
             }
         }
 

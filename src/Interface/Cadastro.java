@@ -3,6 +3,7 @@ package Interface;
 import javax.swing.*;
 
 import assets.APICad;
+import assets.Exceptions.*;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -146,10 +147,15 @@ public class Cadastro extends Template{
         Error.setVisible(false);
 
         limparDados();
+        
         try {
             api.Cadastro(nome, senha, confirmacao,"U", email, telefone);;
-        } catch (Exception e){
-            System.out.println(e);
+        }catch (ConectException e){
+        	ExibirErros.exibir("Erro de Conexao");
+        }catch(LoginException e) {
+        	ExibirErros.exibir("Senha na1o Coincide");
+        }catch(Exception e) {
+        	ExibirErros.exibir("Erro desconhecido");
         }
     }
 
