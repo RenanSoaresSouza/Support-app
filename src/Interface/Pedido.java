@@ -85,7 +85,7 @@ public class Pedido extends Template {
         try {
 
             api.get();
-            api.add(this.user,18,nivelUrgencia.toString(), descricao,nivelUrgencia.getUrgencia());
+            api.add(this.user,nivelUrgencia.toString(), descricao,nivelUrgencia.getUrgencia());
             Tela_Cliente TelaUser =new Tela_Cliente(this.user);
             TelaUser.setVisible(true);
             dispose();

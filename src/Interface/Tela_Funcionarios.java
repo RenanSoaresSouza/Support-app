@@ -134,7 +134,7 @@ public class Tela_Funcionarios extends Template{
 		));
 		painelDescricao.setVisible(false);
 		
-		JTextArea txtDescricao = new JTextArea("Descrição do pedido " + (id+1) + ":\n" +
+		JTextArea txtDescricao = new JTextArea(info.getString("nome")+" : "+info.getString("data")+ ":\n" +
 			info.getString("descricao"));
 		txtDescricao.setEditable(false);
 		txtDescricao.setBackground(new Color(250, 250, 250));

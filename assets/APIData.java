@@ -23,11 +23,10 @@ public class APIData {
     private JSONObject data;
 
     HttpClient client = HttpClient.newHttpClient();
-        private void dataMount(String n,int i,String t,String d,int w){
+        private void dataMount(String n,String t,String d,int w){
             LocalDate hoje = LocalDate.now();
             JSONObject add = new JSONObject();
             add.put("nome",n);
-            add.put("idade",i);
             add.put("titulo",t);
             add.put("descricao",d);
             add.put("warn",w);
@@ -62,8 +61,8 @@ public class APIData {
                     throw new ConectException("Erro de conexão");
                 }
         }
-        public void add (String n,int i,String t,String d, int w) throws Exception,ConectException {            
-            dataMount(n, i, t, d, w);
+        public void add (String n,String t,String d, int w) throws Exception,ConectException {            
+            dataMount(n,t, d, w);
 
             HttpRequest requestput = HttpRequest.newBuilder()
                 .uri(URI.create(apiUrl))
