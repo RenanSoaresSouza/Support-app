@@ -4,7 +4,12 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+import assets.APIData;
+import assets.Exceptions.ConectException;
+import assets.Exceptions.DataException;
+
 public class Tela_Funcionarios extends Template{
+	APIData api = new APIData();
 	
 	public Tela_Funcionarios() {
 		super();
@@ -40,6 +45,16 @@ public class Tela_Funcionarios extends Template{
 		scroll.getViewport().setOpaque(false);
 		
 		paineLFuncionario.add(scroll);
+
+		try {
+			api.get();
+		} catch (DataException e){
+			ExibirErros.exibir(e.getLocalizedMessage());
+		} catch (ConectException e){
+			ExibirErros.exibir(e.getLocalizedMessage());
+		} catch (Exception e){
+			ExibirErros.exibir(e.getLocalizedMessage());
+		}
 		
 		//trocar o 6 por uma variavel que armazena a quantidade de pedidos que existem
 		for(int i = 1; i < 6; i++) {

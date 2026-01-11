@@ -1,7 +1,8 @@
 package assets;
+import org.json.JSONObject;
+
 import assets.Exceptions.*;
 
-import org.json.JSONObject;
 import org.json.JSONArray;
 import java.net.URI;
 import java.net.http.HttpClient;
