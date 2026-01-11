@@ -7,7 +7,16 @@ import java.awt.event.MouseEvent;
 import javax.swing.*;
 import javax.swing.JPopupMenu.Separator;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import assets.APIData;
+
 public class Tela_Cliente extends Template {
+	private APIData api = new APIData();
+	private JSONArray data;
+	private String user = "renan";
+
 	public Tela_Cliente() {
 		super();
 		setTitle("Tela Cliente");
@@ -15,6 +24,7 @@ public class Tela_Cliente extends Template {
 	}
 	
 	public void painelCliente() {
+
 		PainelArredondado painelCliente = new PainelArredondado();
 		painelCliente.setBounds(25,25, 550, 350);
 		painelCliente.setLayout(null);
@@ -68,21 +78,40 @@ public class Tela_Cliente extends Template {
 		painelCliente.add(scroll);
 		
 		//fazer variavel de qtd de pedidos e puxar da API pra ca
-		for(int i = 1;i < 6;i++) {
+		try {
+			api.get();
+		} catch (Exception e){
+			System.out.println(e);
+		} finally{
+			this.data = new JSONArray(api.resp.getJSONObject("record").getJSONArray("data"));
+		}
+		int total=0;
+		for (int x =0;x< data.length();x++){
+			JSONObject info = new JSONObject(this.data.get(x).toString());
+			if (info.getString("nome").equals(user)) {
+				total++;
+			}
+		}
+
+		for(int i = 0;i < data.length();i++) {
+			JSONObject info = new JSONObject(this.data.get(i).toString());
+			if (info.getString("nome").equals(user)){
+			System.out.println(info);
 			JPanel painelPedidos = new JPanel();
 			painelPedidos.setPreferredSize(new Dimension(480, 60));
 			painelPedidos.setMaximumSize(new Dimension(480, 60));
 			painelPedidos.setBackground(Color.WHITE);
 			painelPedidos.setBorder(BorderFactory.createLineBorder(new Color(220, 220, 220), 1));
 			painelPedidos.setLayout(new FlowLayout(FlowLayout.LEFT, 15, 20)); 
-			painelPedidos.add(new JLabel("Pedido n" + i));			
-			painelPedidos.add(new JLabel("Titulo Placeholder"));
+			painelPedidos.add(new JLabel("Pedido n" + (i+1)));			
+			painelPedidos.add(new JLabel("Titulo: " + info.getString("titulo")));
 			painelPedidos.add(new JLabel("Status: Placeholder"));
-			painelPedidos.add(new JLabel("Data: xx/xx/xxxx"));
+			painelPedidos.add(new JLabel("Data:" + info.getString("data")));
 			
 			
 			area_de_pedidos.add(painelPedidos);
 			area_de_pedidos.add(Box.createVerticalStrut(10));
+			}
 			
 		}
 		
