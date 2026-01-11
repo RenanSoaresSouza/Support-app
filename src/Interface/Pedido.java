@@ -2,6 +2,11 @@ package Interface;
 
 import javax.swing.*;
 import javax.swing.text.MaskFormatter;
+
+import org.jcp.xml.dsig.internal.dom.ApacheNodeSetData;
+
+import assets.APIData;
+
 import java.awt.*;
 import java.text.ParseException;
 
@@ -9,6 +14,7 @@ public class Pedido extends Template {
     private JComboBox<Prioridades> tipoPrioridade = new JComboBox<>(Prioridades.values());
     private JTextArea campoDescricao = new JTextArea();
 	private JLabel Error = new JLabel();
+    private APIData api = new APIData();
     
     public Pedido() {
        super();
@@ -65,12 +71,21 @@ public class Pedido extends Template {
     	Prioridades nivelUrgencia = (Prioridades) tipoPrioridade.getSelectedItem();
     	String descricao = campoDescricao.getText();
     	
+
     	if(descricao.isEmpty()) {
     		Error.setText("Descricao vazia");
     		Error.setVisible(true);
     		return;
     	}
     	Error.setVisible(false);
+        try {
+
+            api.get();
+            api.add("renan",18,nivelUrgencia.toString(), descricao,nivelUrgencia.getUrgencia());
+            
+        } catch (Exception e){
+            System.out.println(e);
+        }
     	limpaDados();
     	
     }
