@@ -3,7 +3,6 @@ package Interface;
 import javax.swing.*;
 import javax.swing.text.MaskFormatter;
 
-import org.jcp.xml.dsig.internal.dom.ApacheNodeSetData;
 
 import assets.APIData;
 import assets.Exceptions.ConectException;
