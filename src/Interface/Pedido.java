@@ -2,6 +2,13 @@ package Interface;
 
 import javax.swing.*;
 import javax.swing.text.MaskFormatter;
+
+import org.jcp.xml.dsig.internal.dom.ApacheNodeSetData;
+
+import assets.APIData;
+import assets.Exceptions.ConectException;
+import assets.Exceptions.DataException;
+
 import java.awt.*;
 import java.text.ParseException;
 
@@ -9,9 +16,12 @@ public class Pedido extends Template {
     private JComboBox<Prioridades> tipoPrioridade = new JComboBox<>(Prioridades.values());
     private JTextArea campoDescricao = new JTextArea();
 	private JLabel Error = new JLabel();
+    private APIData api = new APIData();
+    private String user;
     
-    public Pedido() {
+    public Pedido(String u) {
        super();
+       this.user = u;
        telaPedido();
        
     }
@@ -65,12 +75,28 @@ public class Pedido extends Template {
     	Prioridades nivelUrgencia = (Prioridades) tipoPrioridade.getSelectedItem();
     	String descricao = campoDescricao.getText();
     	
+
     	if(descricao.isEmpty()) {
     		Error.setText("Descricao vazia");
     		Error.setVisible(true);
     		return;
     	}
     	Error.setVisible(false);
+        try {
+
+            api.get();
+            api.add(this.user,18,nivelUrgencia.toString(), descricao,nivelUrgencia.getUrgencia());
+            Tela_Cliente TelaUser =new Tela_Cliente(this.user);
+            TelaUser.setVisible(true);
+            dispose();
+            
+        } catch (DataException e){
+            System.out.println(e.getLocalizedMessage());
+        }catch (ConectException e){
+            ExibirErros.exibir("Erro de Conexão");
+        } catch (Exception e){
+            ExibirErros.exibir("Erro Desconhecido");
+        }
     	limpaDados();
     	
     }

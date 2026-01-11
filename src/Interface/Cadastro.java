@@ -150,10 +150,13 @@ public class Cadastro extends Template{
         
         try {
             api.Cadastro(nome, senha, confirmacao,"U", email, telefone);;
+            EscolhaLogin tela = new EscolhaLogin();
+            tela.setVisible(true);
+            dispose();
         }catch (ConectException e){
         	ExibirErros.exibir("Erro de Conexao");
         }catch(LoginException e) {
-        	ExibirErros.exibir("Senha na1o Coincide");
+        	ExibirErros.exibir("Usuario e/ou Senhas já cadastrados");
         }catch(Exception e) {
         	ExibirErros.exibir("Erro desconhecido");
         }

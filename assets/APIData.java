@@ -2,7 +2,8 @@ package assets;
 import org.json.JSONObject;
 
 import assets.Exceptions.*;
-
+import java.time.LocalDate;
+import org.json.JSONObject;
 import org.json.JSONArray;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -23,12 +24,14 @@ public class APIData {
 
     HttpClient client = HttpClient.newHttpClient();
         private void dataMount(String n,int i,String t,String d,int w){
+            LocalDate hoje = LocalDate.now();
             JSONObject add = new JSONObject();
             add.put("nome",n);
             add.put("idade",i);
             add.put("titulo",t);
             add.put("descricao",d);
             add.put("warn",w);
+            add.put("data",hoje.toString());
             System.out.println(this.resp.getJSONObject("record"));
             JSONArray dataobj = new JSONArray(this.resp.getJSONObject("record").getJSONArray("data"));
             if (dataobj.length() == 0){

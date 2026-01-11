@@ -4,15 +4,21 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import assets.APIData;
 import assets.Exceptions.ConectException;
 import assets.Exceptions.DataException;
 
 public class Tela_Funcionarios extends Template{
 	APIData api = new APIData();
+	private JSONArray data;
+	private String user;
 	
-	public Tela_Funcionarios() {
+	public Tela_Funcionarios(String u) {
 		super();
+		this.user = u;
 		setTitle("Tela Funcionario");
 		painelFuncionario();
 	}
@@ -22,7 +28,7 @@ public class Tela_Funcionarios extends Template{
 		paineLFuncionario.setBounds(25,25, 550, 350);
 		paineLFuncionario.setLayout(null);
 		
-		JLabel funcionario = new JLabel("Nome Funcionario");
+		JLabel funcionario = new JLabel(user);
 		funcionario.setBounds(50,30,140,60);
 		funcionario.setFont(new Font("Arial",Font.BOLD,12));
 		funcionario.setForeground(Color.BLACK);
@@ -54,10 +60,13 @@ public class Tela_Funcionarios extends Template{
 			ExibirErros.exibir(e.getLocalizedMessage());
 		} catch (Exception e){
 			ExibirErros.exibir(e.getLocalizedMessage());
+		} finally{
+			this.data = new JSONArray(api.resp.getJSONObject("record").getJSONArray("data"));
+			System.out.println(data);
 		}
 		
 		//trocar o 6 por uma variavel que armazena a quantidade de pedidos que existem
-		for(int i = 1; i < 6; i++) {
+		for(int i = 0; i < this.data.length(); i++) {
 			JPanel pedidoCompleto = criarPedidoExpansivel(i);
 			area_de_pedidos.add(pedidoCompleto);
 			area_de_pedidos.add(Box.createVerticalStrut(10));
@@ -67,6 +76,7 @@ public class Tela_Funcionarios extends Template{
 	}
 	
 	private JPanel criarPedidoExpansivel(int id) {
+		JSONObject info = new JSONObject(this.data.get(id).toString());
 		JPanel pedidoCompleto = new JPanel();
 		pedidoCompleto.setLayout(new BoxLayout(pedidoCompleto, BoxLayout.Y_AXIS));
 		pedidoCompleto.setMaximumSize(new Dimension(480, 1000));
@@ -81,14 +91,28 @@ public class Tela_Funcionarios extends Template{
 		
 		JPanel painelInfo = new JPanel(new FlowLayout(FlowLayout.LEFT, 15, 20));
 		painelInfo.setBackground(Color.WHITE);
-		painelInfo.add(new JLabel("Pedido id" + id));
-		painelInfo.add(new JLabel("Titulo Placeholder"));
+		painelInfo.add(new JLabel("Pedido id" + info.getInt("id")));
+		painelInfo.add(new JLabel("Titulo: "+ info.getString("titulo")));
 		JCheckBox pedidoRealizado = new JCheckBox("Realizado");
 		
 		pedidoRealizado.addActionListener(e -> {
-			int PedidoId = id;
-			//pegar o Id do pedido aqui
-			//colocar funcao de remover pedido aqui!
+			int PedidoId = info.getInt("id");
+				try {
+					api.get();
+					api.delete(PedidoId);
+					Tela_Funcionarios TelaFun = new Tela_Funcionarios(user);
+                    TelaFun.setVisible(true);
+                    dispose(); //fecha o Tela_Cliente
+				} catch (DataException x){
+					ExibirErros.exibir(x.getLocalizedMessage());
+				} catch (ConectException x){
+					ExibirErros.exibir(x.getLocalizedMessage());
+				} catch (Exception x){
+					ExibirErros.exibir(x.getLocalizedMessage());
+				} finally{
+					this.data = new JSONArray(api.resp.getJSONObject("record").getJSONArray("data"));
+					System.out.println(data);
+		}
 			
 		});
 		painelInfo.add(pedidoRealizado);
@@ -110,8 +134,8 @@ public class Tela_Funcionarios extends Template{
 		));
 		painelDescricao.setVisible(false);
 		
-		JTextArea txtDescricao = new JTextArea("Descrição do pedido " + id + ":\n" +
-			"Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n");
+		JTextArea txtDescricao = new JTextArea("Descrição do pedido " + (id+1) + ":\n" +
+			info.getString("descricao"));
 		txtDescricao.setEditable(false);
 		txtDescricao.setBackground(new Color(250, 250, 250));
 		txtDescricao.setFont(new Font("Arial", Font.PLAIN, 11));

@@ -125,21 +125,29 @@ public class Login extends Template {
             if (tipo == "Usuario"){
                 try {
                     api.Login(usuario,senha,"U");
+                    Tela_Cliente TelaUser =new Tela_Cliente(usuario);
+                    TelaUser.setVisible(true);
+                    dispose();
                 }catch (ConectException e){
                 	ExibirErros.exibir("Erro de Conexao");
                 }catch(LoginException e) {
-                	ExibirErros.exibir("Senha na1o Coincide");
+                	ExibirErros.exibir(e.getLocalizedMessage());
                 }catch(Exception e) {
+                    System.out.println(e);
                 	ExibirErros.exibir("Erro desconhecido");
                 }
             } else {
                 try {
                     api.Login(usuario,senha,"F");
+                    Tela_Funcionarios TelaFun = new Tela_Funcionarios(usuario);
+                    TelaFun.setVisible(true);
+                    dispose(); //fecha o Tela_Cliente
                 }catch (ConectException e){
                 	ExibirErros.exibir("Erro de Conexao");
                 }catch(LoginException e) {
-                	ExibirErros.exibir("Senha na1o Coincide");
+                	ExibirErros.exibir(e.getLocalizedMessage());
                 }catch(Exception e) {
+                    System.out.println(e);
                 	ExibirErros.exibir("Erro desconhecido");
                 } 
             }

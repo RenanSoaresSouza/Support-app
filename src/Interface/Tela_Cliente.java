@@ -7,19 +7,32 @@ import java.awt.event.MouseEvent;
 import javax.swing.*;
 import javax.swing.JPopupMenu.Separator;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import assets.APIData;
+import assets.Exceptions.ConectException;
+import assets.Exceptions.DataException;
+
 public class Tela_Cliente extends Template {
-	public Tela_Cliente() {
+	private APIData api = new APIData();
+	private JSONArray data;
+	private String user;
+
+	public Tela_Cliente(String u) {
 		super();
+		this.user =u;
 		setTitle("Tela Cliente");
 		painelCliente();
 	}
 	
 	public void painelCliente() {
+
 		PainelArredondado painelCliente = new PainelArredondado();
 		painelCliente.setBounds(25,25, 550, 350);
 		painelCliente.setLayout(null);
 		
-		JLabel usuario = new JLabel("Nome do Usuario");
+		JLabel usuario = new JLabel(user);
 		usuario.setBounds(50,30,140,60);
 		usuario.setFont(new Font("Arial",Font.BOLD,12));
 		usuario.setForeground(Color.BLACK);
@@ -44,7 +57,7 @@ public class Tela_Cliente extends Template {
 
 
         novoPedido.addActionListener(e ->{
-            Pedido fazerPedido = new Pedido();
+            Pedido fazerPedido = new Pedido(this.user);
             fazerPedido.setVisible(true);
             dispose(); //fecha o Tela_Cliente
         });
@@ -68,21 +81,36 @@ public class Tela_Cliente extends Template {
 		painelCliente.add(scroll);
 		
 		//fazer variavel de qtd de pedidos e puxar da API pra ca
-		for(int i = 1;i < 6;i++) {
+		try {
+			api.get();
+		} catch (DataException e){
+			ExibirErros.exibir(e.getLocalizedMessage());
+		} catch (ConectException e){
+			ExibirErros.exibir("Erro de Conexão");
+		}catch (Exception e){
+			ExibirErros.exibir("Erro Desconhecido");
+		}finally{
+			this.data = new JSONArray(api.resp.getJSONObject("record").getJSONArray("data"));
+		}
+
+		for(int i = 0;i < data.length();i++) {
+			JSONObject info = new JSONObject(this.data.get(i).toString());
+			if (info.getString("nome").equals(user)){
+			System.out.println(info);
 			JPanel painelPedidos = new JPanel();
 			painelPedidos.setPreferredSize(new Dimension(480, 60));
 			painelPedidos.setMaximumSize(new Dimension(480, 60));
 			painelPedidos.setBackground(Color.WHITE);
 			painelPedidos.setBorder(BorderFactory.createLineBorder(new Color(220, 220, 220), 1));
 			painelPedidos.setLayout(new FlowLayout(FlowLayout.LEFT, 15, 20)); 
-			painelPedidos.add(new JLabel("Pedido n" + i));			
-			painelPedidos.add(new JLabel("Titulo Placeholder"));
-			painelPedidos.add(new JLabel("Status: Placeholder"));
-			painelPedidos.add(new JLabel("Data: xx/xx/xxxx"));
+			painelPedidos.add(new JLabel("id: " + (i+1)));			
+			painelPedidos.add(new JLabel("Titulo: " + info.getString("titulo")));
+			painelPedidos.add(new JLabel("Data:" + info.getString("data")));
 			
 			
 			area_de_pedidos.add(painelPedidos);
 			area_de_pedidos.add(Box.createVerticalStrut(10));
+			}
 			
 		}
 		
