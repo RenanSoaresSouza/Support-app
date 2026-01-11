@@ -2,7 +2,7 @@ package Interface;
 
 import javax.swing.*;
 
-import assets.APICad;
+import API.APICad;
 
 import java.awt.*;
 
