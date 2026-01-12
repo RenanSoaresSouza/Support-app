@@ -28,7 +28,7 @@ public class Cadastro extends Template{
 
     private void paineldeCadastro(){
         PainelArredondado telaCadastro = new PainelArredondado();
-        telaCadastro.setBounds(50, 10, 500, 350); // Ajustei o tamanho para caber tudo melhor
+        telaCadastro.setBounds(50, 10, 500, 350);
         telaCadastro.setLayout(null);
 
         JLabel Cadastre_se = new JLabel("Cadastre-se!");
@@ -93,7 +93,7 @@ public class Cadastro extends Template{
         telaCadastro.add(campoEmail);
 
         Error = new JLabel();
-        Error.setBounds(100,280,300,20);
+        Error.setBounds(110,262,300,20);
         Error.setFont(new Font("Arial", Font.BOLD,11));
         Error.setForeground(Color.RED);
         Error.setVisible(false);
@@ -127,11 +127,17 @@ public class Cadastro extends Template{
             Error.setVisible(true);
             return;
         }
-        if(senha.length() < 8){
+        if(senha.isEmpty()){
+            Error.setText("Insira uma senha");
+            Error.setVisible(true);
+            return;
+        }
+        if(senha.length() < 8 && senha.length() != 0 ) {
             Error.setText("Senha muito curta, insira pelo menos 8 caracteres");
             Error.setVisible(true);
             return;
         }
+
         if(!senha.equals(confirmacao)){
             Error.setText("As senhas não coincidem!");
             Error.setVisible(true);
