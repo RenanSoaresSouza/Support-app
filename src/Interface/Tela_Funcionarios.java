@@ -159,8 +159,8 @@ public class Tela_Funcionarios extends Template{
 		pedidoCompleto.add(painelDescricao);
 		
 		return pedidoCompleto;
-	}
-
+		}
+	
 	private void atualizarPainel() {
 		area_de_pedidos.removeAll();
 
@@ -172,4 +172,5 @@ public class Tela_Funcionarios extends Template{
 		
 		area_de_pedidos.revalidate(); //reseta os componentes
 		area_de_pedidos.repaint(); //redesenha na tela
+	}
 }
