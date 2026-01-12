@@ -28,7 +28,7 @@ public class Cadastro extends Template{
 
     private void paineldeCadastro(){
         PainelArredondado telaCadastro = new PainelArredondado();
-        telaCadastro.setBounds(50, 10, 500, 350);
+        telaCadastro.setBounds(50, 10, 500, 340);
         telaCadastro.setLayout(null);
 
         JLabel Cadastre_se = new JLabel("Cadastre-se!");
