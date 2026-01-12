@@ -9,6 +9,8 @@ import assets.Exceptions.ConectException;
 import assets.Exceptions.DataException;
 
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.text.ParseException;
 
 public class Pedido extends Template {
@@ -27,38 +29,54 @@ public class Pedido extends Template {
     
     public void telaPedido() {
     	PainelArredondado interfacePedido = new PainelArredondado();
-    	interfacePedido.setBounds(25,25, 550, 350);
+    	interfacePedido.setBounds(40,25, 520, 300);
 		interfacePedido.setLayout(null);
 		
 		JPanel gridPedidos = new JPanel();
 		gridPedidos.setLayout(new GridLayout(3,2,10,10));
 		gridPedidos.setOpaque(false);
 		gridPedidos.setBounds(50, 50, 450, 200);
-		
-        gridPedidos.add(new JLabel("Titulo"));
-        tipoPrioridade = new JComboBox<>(Prioridades.values());
-        tipoPrioridade.setBorder(BorderFactory.createLineBorder(new Color(200,200,200)));
-        tipoPrioridade.setBackground(Color.WHITE);
-        tipoPrioridade.setEditable(false);
-        
+
+        JLabel labelTitulo = new JLabel("Título");
+        labelTitulo.setFont(new Font("Arial", Font.BOLD, 17));
+        labelTitulo.setForeground(Color.WHITE);
+        gridPedidos.add(labelTitulo);
+
+
         gridPedidos.add(tipoPrioridade);
 
-        gridPedidos.add(new JLabel("Descrição"));
-        campoDescricao = new JTextArea(5, 20); 
-        campoDescricao.setLineWrap(true);
-        campoDescricao.setWrapStyleWord(true); 
-        campoDescricao.setBorder(BorderFactory.createLineBorder(new Color(200, 200, 200)));
-        JScrollPane scrollDescricao = new JScrollPane(campoDescricao);
-        gridPedidos.add(scrollDescricao);
-  
-        JButton Envio = new JButton("Enviar Pedido");
-        
-        Envio.addActionListener(e ->{
-        	realizarPedido();
+        JLabel lblDesc = new JLabel("Descrição");
+        lblDesc.setFont(new Font("Arial", Font.BOLD, 17));
+        lblDesc.setForeground(Color.WHITE);
+        gridPedidos.add(lblDesc);
+
+        TextAreaArredondada scrollCustom = new TextAreaArredondada(5, 20);
+        campoDescricao = scrollCustom.getTextArea();
+        gridPedidos.add(scrollCustom);
+
+        BotaoArredondado Envio = new BotaoArredondado("Enviar Pedido");
+        Envio.setBackground(Color.WHITE);
+        Envio.setForeground(new Color(200, 230, 255));
+        Envio.setFont(new Font("Arial", Font.BOLD, 12));
+        Envio.setBackground(new Color(25, 25, 112));
+        Envio.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                Envio.setBackground(new Color(93, 23, 139)); // Cor quando o mouse entra
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+                Envio.setBackground(new Color(25, 25, 112)); // Cor original quando o mouse sai
+            }
         });
-        gridPedidos.add(new JLabel(""));
+
+
+        Envio.addActionListener(e -> {
+            realizarPedido();
+        });
+        gridPedidos.add(new JLabel("")); // Espaçador para pular uma coluna
         gridPedidos.add(Envio);
-        
+
         Error = new JLabel();
         Error.setBounds(330, 250, 200, 40);
         Error.setFont(new Font("Arial", Font.BOLD,11));
