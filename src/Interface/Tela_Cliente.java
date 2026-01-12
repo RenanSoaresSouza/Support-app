@@ -29,16 +29,17 @@ public class Tela_Cliente extends Template {
 	public void painelCliente() {
 
 		PainelArredondado painelCliente = new PainelArredondado();
-		painelCliente.setBounds(25,25, 550, 350);
-		painelCliente.setLayout(null);
-		
-		JLabel usuario = new JLabel(user);
+		painelCliente.setBounds(25,25, 550, 310);
+        painelCliente.setBackground(new Color(255, 230, 255));
+        painelCliente.setLayout(null);
+
+		JLabel usuario = new JLabel("User: " + user);
 		usuario.setBounds(50,30,140,60);
 		usuario.setFont(new Font("Arial",Font.BOLD,12));
 		usuario.setForeground(Color.BLACK);
 		usuario.setBackground(null);
 		painelCliente.add(usuario);
-		
+
 		BotaoArredondado novoPedido = new BotaoArredondado("Novo Pedido");
 		novoPedido.setBounds(400,25,120,60);
 		novoPedido.setFont(new Font("Arial", Font.PLAIN, 12));
