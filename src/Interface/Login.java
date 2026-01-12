@@ -121,7 +121,16 @@ public class Login extends Template {
             Error.setVisible(true);
         } else{
             Error.setVisible(false);
-            JOptionPane.showMessageDialog(this,"Iniciando validacao...","Aguarde",JOptionPane.INFORMATION_MESSAGE);
+            TelaCarregamento aguarde = new TelaCarregamento(this, "Validando Acesso...");
+
+            Timer timer = new Timer(1370, e -> {
+                aguarde.dispose();
+            });
+            timer.setRepeats(false);
+            timer.start();
+
+            aguarde.setVisible(true);
+            
             if (tipo == "Usuario"){
                 try {
                     api.Login(usuario,senha,"U");
