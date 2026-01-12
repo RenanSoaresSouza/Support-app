@@ -15,6 +15,8 @@ public class Tela_Funcionarios extends Template{
 	APIData api = new APIData();
 	private JSONArray data;
 	private String user;
+	private PainelArredondado area_de_pedidos; // variavel pra armazenar os pedidos
+	private JScrollPane scroll = new JScrollPane();
 	
 	public Tela_Funcionarios(String u) {
 		super();
@@ -40,7 +42,7 @@ public class Tela_Funcionarios extends Template{
 		separador.setBackground(new Color(200,200,200));
 		paineLFuncionario.add(separador);
 		
-		PainelArredondado area_de_pedidos = new PainelArredondado();
+		area_de_pedidos = new PainelArredondado();
 		area_de_pedidos.setDesenharFundo(false);
 		area_de_pedidos.setLayout(new BoxLayout(area_de_pedidos,BoxLayout.Y_AXIS));
 		
@@ -65,12 +67,7 @@ public class Tela_Funcionarios extends Template{
 			System.out.println(data);
 		}
 		
-		//trocar o 6 por uma variavel que armazena a quantidade de pedidos que existem
-		for(int i = 0; i < this.data.length(); i++) {
-			JPanel pedidoCompleto = criarPedidoExpansivel(i);
-			area_de_pedidos.add(pedidoCompleto);
-			area_de_pedidos.add(Box.createVerticalStrut(10));
-		}
+		atualizarPainel();
 		
 		panel.add(paineLFuncionario);
 	}
@@ -98,11 +95,8 @@ public class Tela_Funcionarios extends Template{
 		pedidoRealizado.addActionListener(e -> {
 			int PedidoId = info.getInt("id");
 				try {
-					api.get();
 					api.delete(PedidoId);
-					Tela_Funcionarios TelaFun = new Tela_Funcionarios(user);
-                    TelaFun.setVisible(true);
-                    dispose(); //fecha o Tela_Cliente
+					api.get(); //pegar os dados depois do delete, para atualizar a tela
 				} catch (DataException x){
 					ExibirErros.exibir(x.getLocalizedMessage());
 				} catch (ConectException x){
@@ -112,6 +106,7 @@ public class Tela_Funcionarios extends Template{
 				} finally{
 					this.data = new JSONArray(api.resp.getJSONObject("record").getJSONArray("data"));
 					System.out.println(data);
+					atualizarPainel();
 		}
 			
 		});
@@ -164,4 +159,17 @@ public class Tela_Funcionarios extends Template{
 		
 		return pedidoCompleto;
 	}
+	
+	private void atualizarPainel() {
+		area_de_pedidos.removeAll();
+		
+		for(int i = 0; i < this.data.length();i++) {
+			JPanel pedidoCompleto = criarPedidoExpansivel(i);
+            area_de_pedidos.add(pedidoCompleto);
+            area_de_pedidos.add(Box.createVerticalStrut(10));
+		}
+		
+		area_de_pedidos.revalidate(); //reseta os componentes
+		area_de_pedidos.repaint(); //redesenha na tela
+		}
 }
