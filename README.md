@@ -67,11 +67,12 @@ class PainelArredondado extends JPanel {
 
 | Escolha de Perfil | Tela de Acesso (Login) | Formulário de Cadastro |
 | :---: | :---: | :---: |
-| ![Escolha de Perfil](./images/Tela_Escolha.png) | ![Login Screen](./images/Tela_Login.png) | ![Cadastro](./images/Tela_Cadastro.png) |
+| ![Escolha de Perfil](./src/Imagem/Tela_Escolha.png) | ![Login Screen](./src/Imagem/Tela_Login.png) | ![Cadastro](./src/Imagem/Tela_Cadastro.png) |
 
 | Painel do Cliente | Formulário de Pedido | Painel do Funcionário |
 | :---: | :---: | :---: |
-| ![Painel Cliente](./images/Tela_Cliente.png) | ![Formulário Pedido](./images/Tela_Template.png) | ![Painel Funcionario](./images/Tela_Funcionario.png) |
+| ![Painel Cliente](./src/Imagem/Tela_Cliente.png) | ![Formulário Pedido](./src/Imagem/Tela_Template.png) | ![Painel Funcionario](./src/Imagem/Tela_Funcionario.png) |
+
 
 
 ## Como Executar o Projeto
