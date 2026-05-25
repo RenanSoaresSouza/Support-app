@@ -95,3 +95,9 @@ javac Main.java assets/*.java assets/Exceptions/*.java Interface/*.java org/json
 # Inicializar o sistema
 java Main
 ```
+
+## Integrantes do Trabalho
+
+- **[Francisco Gabriel Silveira](https://github.com/Fratis35)**
+- **[João Manuel](https://github.com/JoaoManoel22)**
+- **[Renan Soares](https://github.com/RenanSoaresSouza)**
