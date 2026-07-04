@@ -29,7 +29,7 @@ Para contornar o design padrão do Swing, o projeto renderiza seus próprios com
 * Enums Estruturados: Uso do enumerador Prioridades alimentando caixas de seleção dinâmica (JComboBox), mapeando textualmente as exibições e extraindo pesos numéricos de urgência através do método encapsulado getUrgencia().
 * Tratamento de Exceções Customizadas: Arquitetura desacoplada de erros mapeando falhas de rede vs. falhas de autenticação (ConectException, DataException, LoginException).
 
-## Estrutura Estrutural do Projeto
+## Estrutura do Projeto
 ```text
 ├── assets/         # Conexões com as APIs, exceções e regras de negócio
 ├── Interface/      # Telas (Clientes, Técnicos, Cadastro, Janelas Base e Customizações)
