@@ -4,7 +4,7 @@
 ![API](https://img.shields.io/badge/API-REST-green)
 ![JSON](https://img.shields.io/badge/JSON-org.json-yellow)
 ![POO](https://img.shields.io/badge/Paradigma-POO-purple)
-![License](https://img.shields.io/badge/License-MIT-yellow)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 Sistema Desktop em Java para controle, abertura e resolução de chamados técnicos de TI. O projeto utiliza consumo de API REST externa e conta com uma interface moderna e customizada via Java 2D.
 
