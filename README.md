@@ -1,4 +1,10 @@
 # App de Gerenciamento de Suporte de Computadores
+![Java](https://img.shields.io/badge/Java-25-red)
+![Swing](https://img.shields.io/badge/GUI-Java%20Swing-blue)
+![API](https://img.shields.io/badge/API-REST-green)
+![JSON](https://img.shields.io/badge/JSON-org.json-yellow)
+![POO](https://img.shields.io/badge/Paradigma-POO-purple)
+![License](https://img.shields.io/badge/License-MIT-yellow)
 
 Sistema Desktop em Java para controle, abertura e resolução de chamados técnicos de TI. O projeto utiliza consumo de API REST externa e conta com uma interface moderna e customizada via Java 2D.
 
@@ -101,3 +107,7 @@ java Main
 - **[Francisco Gabriel Silveira](https://github.com/Fratis35)**
 - **[João Manuel](https://github.com/JoaoManoel22)**
 - **[Renan Soares](https://github.com/RenanSoaresSouza)**
+
+## 📄 Licença
+
+Este projeto está licenciado sob a Licença MIT. Consulte o arquivo [LICENSE](LICENSE).
