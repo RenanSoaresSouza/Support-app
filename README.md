@@ -42,6 +42,7 @@ Para contornar o design padrão do Swing, o projeto renderiza seus próprios com
 ├── org/json/       # Biblioteca org.json embutida nativamente no escopo
 ├── src/            # Código fonte do projeto
 ├── Main.java       # Ponto de entrada (Classe Principal)
+├── LICENSE         # Licensa MIT
 └── README.md       # Documentação do sistema
 ```
 
